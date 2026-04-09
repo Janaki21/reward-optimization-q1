@@ -1,0 +1,39 @@
+project_name: reward_invariance_q1
+
+random_seeds: [11, 17, 23, 31, 47, 59, 71, 83, 97, 101]
+
+episode_scales: [10000, 50000, 100000]
+
+n_states: 20
+n_actions: 2
+
+gamma: 0.95
+alpha: 0.10
+epsilon_start: 1.00
+epsilon_end: 0.05
+epsilon_decay: 0.9995
+
+perturbation_grid: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+
+reward_safe: 1.0
+reward_unsafe_bonus: 5.0
+reward_true: 1.0
+reward_false_bonus: 5.0
+constraint_penalty: 2.0
+
+learning_curve_points: 250
+
+output_dir: outputs
+figures_dir: outputs/figures
+tables_dir: outputs/tables
+logs_dir: outputs/logs
+
+agents:
+  - reward
+  - soft
+  - constrained
+
+environments:
+  - adversarial
+  - truth_reward
+  - monitoring
