@@ -1,4 +1,4 @@
-project_name: invariant_constraint_enforcement
+project_name: constraint_misspecification_ablation
 
 random_seeds:
   - 11
@@ -37,19 +37,17 @@ eval_steps: 20000
 learning_curve_points: 100
 
 corruption_probabilities:
-  - 0.0
-  - 0.25
-  - 0.5
-  - 0.75
   - 1.0
 
 corruption_magnitudes:
-  - 1.0
-  - 5.0
   - 10.0
 
 constraint_errors:
   - 0.0
+  - 0.01
+  - 0.05
+  - 0.10
+  - 0.20
 
 alpha: 0.10
 gamma: 0.95
@@ -75,7 +73,7 @@ environments:
   - truth_proxy
   - monitoring_shift
 
-output_dir: outputs
-figures_dir: outputs/figures
-tables_dir: outputs/tables
-logs_dir: outputs/logs
+output_dir: outputs/constraint_ablation
+figures_dir: outputs/constraint_ablation/figures
+tables_dir: outputs/constraint_ablation/tables
+logs_dir: outputs/constraint_ablation/logs

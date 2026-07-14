@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+import argparse
+import json
+import platform
+import subprocess
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
+import scipy
 
 from src.analysis import run_full_analysis
 from src.config import load_config
@@ -11,18 +17,27 @@ from src.simulate import run_all_simulations
 from src.utils import ensure_directories
 
 
-def save_tables(analysis_outputs: dict[str, pd.DataFrame], tables_dir: str) -> None:
-    Path(tables_dir).mkdir(parents=True, exist_ok=True)
-
-    for name, df in analysis_outputs.items():
-        csv_path = Path(tables_dir) / f"{name}.csv"
-        xlsx_path = Path(tables_dir) / f"{name}.xlsx"
-        df.to_csv(csv_path, index=False)
-        df.to_excel(xlsx_path, index=False)
+def get_git_commit() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            text=True,
+        ).strip()
+    except Exception:
+        return "unknown"
 
 
 def main() -> None:
-    config = load_config("configs/base.yaml")
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--config",
+        default="configs/base.yaml",
+    )
+
+    arguments = parser.parse_args()
+
+    config = load_config(arguments.config)
 
     ensure_directories(
         [
@@ -33,63 +48,98 @@ def main() -> None:
         ]
     )
 
-    print("=" * 80)
-    print("RUNNING Q1-STYLE REWARD INVARIANCE EXPERIMENTS")
-    print("=" * 80)
+    print("Starting reward-misspecification experiments")
+    print(f"Configuration: {arguments.config}")
 
-    episode_df, curve_df, run_summary_df = run_all_simulations(config)
+    run_summary, learning_curves = (
+        run_all_simulations(config)
+    )
 
-    episode_df.to_csv(Path(config["logs_dir"]) / "episode_level_logs.csv", index=False)
-    curve_df.to_csv(Path(config["logs_dir"]) / "learning_curves.csv", index=False)
-    run_summary_df.to_csv(Path(config["logs_dir"]) / "run_summary.csv", index=False)
+    run_summary_path = (
+        Path(config["logs_dir"])
+        / "run_summary.csv"
+    )
 
-    print("Simulation complete.")
-    print(f"Episode logs: {Path(config['logs_dir']) / 'episode_level_logs.csv'}")
-    print(f"Learning curves: {Path(config['logs_dir']) / 'learning_curves.csv'}")
-    print(f"Run summaries: {Path(config['logs_dir']) / 'run_summary.csv'}")
+    learning_curves_path = (
+        Path(config["logs_dir"])
+        / "learning_curves.csv"
+    )
 
-    analysis_outputs = run_full_analysis(run_summary_df)
-    save_tables(analysis_outputs, config["tables_dir"])
+    run_summary.to_csv(
+        run_summary_path,
+        index=False,
+    )
 
-    agg_df = analysis_outputs["aggregated_statistics"]
-    generate_all_plots(agg_df, curve_df, config["figures_dir"])
+    learning_curves.to_csv(
+        learning_curves_path,
+        index=False,
+    )
 
-    print("Analysis complete.")
-    print(f"Tables saved in: {config['tables_dir']}")
-    print(f"Figures saved in: {config['figures_dir']}")
+    analysis_outputs = run_full_analysis(
+        run_summary
+    )
 
-    print("\nGenerated tables:")
-    for name in analysis_outputs.keys():
-        print(f" - {name}.csv")
-        print(f" - {name}.xlsx")
+    for table_name, table in (
+        analysis_outputs.items()
+    ):
+        csv_path = (
+            Path(config["tables_dir"])
+            / f"{table_name}.csv"
+        )
 
-    print("\nGenerated figures:")
-    figure_names = [
-        "adversarial_primary_metric.png",
-        "truth_reward_primary_metric.png",
-        "monitoring_primary_metric.png",
-        "adversarial_utility_tradeoff.png",
-        "truth_reward_utility_tradeoff.png",
-        "monitoring_utility_tradeoff.png",
-        "adversarial_learning_curve_avg_reward_so_far.png",
-        "adversarial_learning_curve_cvr_so_far.png",
-        "truth_reward_learning_curve_avg_reward_so_far.png",
-        "truth_reward_learning_curve_far_so_far.png",
-        "monitoring_learning_curve_avg_reward_so_far.png",
-        "monitoring_learning_curve_cvr_so_far.png",
-        "monitoring_learning_curve_deception_index_so_far.png",
-        "adversarial_ablation_bar.png",
-        "truth_reward_ablation_bar.png",
-        "monitoring_ablation_bar.png",
-        "adversarial_scaling_analysis.png",
-        "truth_reward_scaling_analysis.png",
-        "monitoring_scaling_analysis.png",
-        "integrated_summary_figure.png",
-    ]
-    for fig in figure_names:
-        print(f" - {fig}")
+        excel_path = (
+            Path(config["tables_dir"])
+            / f"{table_name}.xlsx"
+        )
 
-    print("\nDone.")
+        table.to_csv(
+            csv_path,
+            index=False,
+        )
+
+        table.to_excel(
+            excel_path,
+            index=False,
+        )
+
+    generate_all_plots(
+        aggregated=analysis_outputs[
+            "aggregated_statistics"
+        ],
+        learning_curves=learning_curves,
+        figures_directory=config[
+            "figures_dir"
+        ],
+    )
+
+    manifest = {
+        "configuration_file": arguments.config,
+        "configuration": config,
+        "git_commit": get_git_commit(),
+        "python_version":
+            platform.python_version(),
+        "numpy_version": np.__version__,
+        "pandas_version": pd.__version__,
+        "scipy_version": scipy.__version__,
+    }
+
+    manifest_path = (
+        Path(config["output_dir"])
+        / "run_manifest.json"
+    )
+
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2),
+        encoding="utf-8",
+    )
+
+    print(
+        f"Completed {len(run_summary)} independent runs."
+    )
+
+    print(
+        f"Outputs saved in {config['output_dir']}"
+    )
 
 
 if __name__ == "__main__":

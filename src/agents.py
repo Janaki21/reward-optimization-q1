@@ -1,7 +1,8 @@
+"""Tabular baselines for reward and constraint enforcement."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Optional
 
 import numpy as np
 
@@ -9,107 +10,184 @@ import numpy as np
 @dataclass
 class AgentConfig:
     n_states: int
-    n_actions: int
-    alpha: float
-    gamma: float
-    epsilon_start: float
-    epsilon_end: float
-    epsilon_decay: float
-    constraint_penalty: float
+    n_actions: int = 2
+    alpha: float = 0.1
+    gamma: float = 0.95
+    epsilon_start: float = 1.0
+    epsilon_end: float = 0.05
+    epsilon_decay: float = 0.9995
+    fixed_penalty: float = 2.0
+    cost_limit: float = 0.02
+    lambda_lr: float = 0.05
+    lambda_max: float = 100.0
 
 
-class BaseQLearningAgent:
-    def __init__(self, cfg: AgentConfig, seed: int) -> None:
-        self.cfg = cfg
+class QLearningAgent:
+    def __init__(
+        self,
+        config: AgentConfig,
+        seed: int,
+        mode: str,
+    ) -> None:
+        self.config = config
+        self.mode = mode
         self.rng = np.random.default_rng(seed)
-        self.q = np.zeros((cfg.n_states, cfg.n_actions), dtype=float)
-        self.epsilon = cfg.epsilon_start
 
-    def valid_actions(self, state: int) -> list[int]:
-        return list(range(self.cfg.n_actions))
+        self.q_values = np.zeros(
+            (config.n_states, config.n_actions),
+            dtype=float,
+        )
 
-    def shaped_q_values(self, state: int) -> np.ndarray:
-        return self.q[state].copy()
+        self.epsilon = config.epsilon_start
+        self.lagrange_multiplier = 0.0
 
-    def select_action(self, state: int) -> int:
-        valid = self.valid_actions(state)
-        if not valid:
-            raise RuntimeError("No valid actions available.")
+    def candidate_actions(
+        self,
+        admissible_actions: list[int] | None,
+    ) -> list[int]:
+        if self.mode == "hard_shield":
+            if not admissible_actions:
+                raise RuntimeError(
+                    "Hard shield received an empty admissible action set."
+                )
 
-        if self.rng.random() < self.epsilon:
-            return int(self.rng.choice(valid))
+            return admissible_actions
 
-        qvals = self.shaped_q_values(state)
-        masked = np.full_like(qvals, fill_value=-1e18, dtype=float)
-        for a in valid:
-            masked[a] = qvals[a]
-        best_actions = np.flatnonzero(masked == np.max(masked))
-        return int(self.rng.choice(best_actions))
+        return list(range(self.config.n_actions))
+
+    def select_action(
+        self,
+        state: int,
+        admissible_actions: list[int] | None = None,
+        explore: bool = True,
+    ) -> int:
+        candidates = self.candidate_actions(
+            admissible_actions
+        )
+
+        if (
+            explore
+            and self.rng.random() < self.epsilon
+        ):
+            return int(
+                self.rng.choice(candidates)
+            )
+
+        candidate_values = self.q_values[
+            state,
+            candidates,
+        ]
+
+        maximum_value = np.max(
+            candidate_values
+        )
+
+        best_indices = np.flatnonzero(
+            np.isclose(
+                candidate_values,
+                maximum_value,
+            )
+        )
+
+        selected_index = int(
+            self.rng.choice(best_indices)
+        )
+
+        return int(candidates[selected_index])
 
     def update(
         self,
         state: int,
         action: int,
-        reward: float,
+        proxy_reward: float,
+        cost: float,
         next_state: int,
-        done: bool,
-        info: Optional[dict] = None,
+        next_admissible_actions: list[int] | None = None,
     ) -> None:
-        target = reward
-        if not done:
-            target += self.cfg.gamma * np.max(self.q[next_state])
+        shaped_reward = proxy_reward
 
-        td_error = target - self.q[state, action]
-        self.q[state, action] += self.cfg.alpha * td_error
+        if self.mode == "fixed_penalty":
+            shaped_reward -= (
+                self.config.fixed_penalty
+                * cost
+            )
 
-        self.epsilon = max(self.cfg.epsilon_end, self.epsilon * self.cfg.epsilon_decay)
+        elif self.mode == "lagrangian":
+            shaped_reward -= (
+                self.lagrange_multiplier
+                * cost
+            )
+
+            multiplier_update = (
+                self.config.lambda_lr
+                * (
+                    cost
+                    - self.config.cost_limit
+                )
+            )
+
+            self.lagrange_multiplier = float(
+                np.clip(
+                    self.lagrange_multiplier
+                    + multiplier_update,
+                    0.0,
+                    self.config.lambda_max,
+                )
+            )
+
+        candidates = self.candidate_actions(
+            next_admissible_actions
+        )
+
+        next_value = np.max(
+            self.q_values[
+                next_state,
+                candidates,
+            ]
+        )
+
+        target = (
+            shaped_reward
+            + self.config.gamma * next_value
+        )
+
+        temporal_difference_error = (
+            target
+            - self.q_values[state, action]
+        )
+
+        self.q_values[state, action] += (
+            self.config.alpha
+            * temporal_difference_error
+        )
+
+        self.epsilon = max(
+            self.config.epsilon_end,
+            self.epsilon
+            * self.config.epsilon_decay,
+        )
 
 
-class RewardQLearningAgent(BaseQLearningAgent):
-    pass
+AGENT_MODES = (
+    "reward_only",
+    "fixed_penalty",
+    "lagrangian",
+    "hard_shield",
+)
 
 
-class ConstrainedQLearningAgent(BaseQLearningAgent):
-    """
-    Hard veto:
-    action 1 is never allowed.
-    """
+def build_agent(
+    name: str,
+    config: AgentConfig,
+    seed: int,
+) -> QLearningAgent:
+    if name not in AGENT_MODES:
+        raise ValueError(
+            f"Unknown agent: {name}"
+        )
 
-    def valid_actions(self, state: int) -> list[int]:
-        return [0]
-
-
-class SoftPenaltyQLearningAgent(BaseQLearningAgent):
-    """
-    Soft ablation:
-    action 1 allowed, but discouraged by penalty.
-    """
-
-    def shaped_q_values(self, state: int) -> np.ndarray:
-        qvals = self.q[state].copy()
-        qvals[1] -= self.cfg.constraint_penalty
-        return qvals
-
-    def update(
-        self,
-        state: int,
-        action: int,
-        reward: float,
-        next_state: int,
-        done: bool,
-        info: Optional[dict] = None,
-    ) -> None:
-        shaped_reward = reward
-        if action == 1:
-            shaped_reward -= self.cfg.constraint_penalty
-        super().update(state, action, shaped_reward, next_state, done, info)
-
-
-def build_agent(agent_name: str, cfg: AgentConfig, seed: int) -> BaseQLearningAgent:
-    if agent_name == "reward":
-        return RewardQLearningAgent(cfg, seed)
-    if agent_name == "soft":
-        return SoftPenaltyQLearningAgent(cfg, seed)
-    if agent_name == "constrained":
-        return ConstrainedQLearningAgent(cfg, seed)
-    raise ValueError(f"Unknown agent: {agent_name}")
+    return QLearningAgent(
+        config=config,
+        seed=seed,
+        mode=name,
+    )
