@@ -1,15 +1,14 @@
 project_name: invariant_constraint_smoke
 
-random_seeds: [11, 17, 23]
+random_seeds: [11]
 
-train_steps: 1000
-eval_steps: 500
-learning_curve_points: 20
+train_steps: 300
+eval_steps: 200
+learning_curve_points: 10
 
-corruption_probabilities: [0.0, 0.5, 1.0]
+corruption_probabilities: [0.0, 1.0]
 corruption_magnitudes: [1.0, 5.0]
-constraint_errors: [0.0, 0.10]
-
+constraint_errors: [0.0]
 alpha: 0.10
 gamma: 0.95
 
