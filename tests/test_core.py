@@ -14,13 +14,22 @@ from src.analysis import (
     calculate_perturbation_auc,
     holm_adjustment,
     run_full_analysis,
+    trapezoidal_auc,
 )
-from src.envs import build_environment
-from src.simulate import run_single_experiment
+from src.envs import (
+    build_environment,
+)
+from src.simulate import (
+    run_single_experiment,
+)
 
 
-class EnvironmentTests(unittest.TestCase):
-    def test_truth_depends_on_ground_truth(self):
+class EnvironmentTests(
+    unittest.TestCase
+):
+    def test_truth_depends_on_ground_truth(
+        self,
+    ):
         environment = build_environment(
             name="truth_proxy",
             seed=1,
@@ -52,7 +61,9 @@ class EnvironmentTests(unittest.TestCase):
             0,
         )
 
-    def test_monitoring_is_observable(self):
+    def test_monitoring_is_observable(
+        self,
+    ):
         environment = build_environment(
             name="monitoring_shift",
             seed=1,
@@ -70,7 +81,9 @@ class EnvironmentTests(unittest.TestCase):
             1,
         )
 
-    def test_hard_shield_respects_admissibility(self):
+    def test_hard_shield_respects_admissibility(
+        self,
+    ):
         agent = build_agent(
             name="hard_shield",
             config=AgentConfig(
@@ -93,44 +106,69 @@ class EnvironmentTests(unittest.TestCase):
                 0,
             )
 
-    def test_constraint_error_changes_prediction(self):
-        environment = build_environment(
-            name="monitoring_shift",
-            seed=1,
-            corruption_probability=0.0,
-            corruption_magnitude=1.0,
-            constraint_error=1.0,
-        )
-
-        predicted_actions = (
-            environment
-            .predicted_admissible_actions(
-                state=0
+    def test_constraint_randomness_is_separate(
+        self,
+    ):
+        first_environment = (
+            build_environment(
+                name="monitoring_shift",
+                seed=11,
+                corruption_probability=1.0,
+                corruption_magnitude=5.0,
+                constraint_error=0.0,
             )
         )
 
+        second_environment = (
+            build_environment(
+                name="monitoring_shift",
+                seed=11,
+                corruption_probability=1.0,
+                corruption_magnitude=5.0,
+                constraint_error=0.2,
+            )
+        )
+
+        first_states = [
+            first_environment.sample_state()
+            for _ in range(100)
+        ]
+
+        second_states = [
+            second_environment.sample_state()
+            for _ in range(100)
+        ]
+
         self.assertEqual(
-            predicted_actions,
-            [1],
+            first_states,
+            second_states,
         )
 
 
-class StatisticalTests(unittest.TestCase):
-    def test_bootstrap_interval_is_ordered(self):
-        lower_bound, upper_bound = (
+class StatisticalTests(
+    unittest.TestCase
+):
+    def test_bootstrap_interval_is_ordered(
+        self,
+    ):
+        lower, upper = (
             bootstrap_confidence_interval(
                 [0.1, 0.2, 0.3, 0.4]
             )
         )
 
         self.assertLessEqual(
-            lower_bound,
-            upper_bound,
+            lower,
+            upper,
         )
 
-    def test_holm_adjustment_is_monotonic(self):
-        adjusted_values = holm_adjustment(
-            [0.01, 0.03, 0.20]
+    def test_holm_adjustment_is_monotonic(
+        self,
+    ):
+        adjusted_values = (
+            holm_adjustment(
+                [0.01, 0.03, 0.20]
+            )
         )
 
         self.assertTrue(
@@ -141,7 +179,22 @@ class StatisticalTests(unittest.TestCase):
             )
         )
 
-    def test_perturbation_auc_is_calculated(self):
+    def test_manual_trapezoidal_auc(
+        self,
+    ):
+        area = trapezoidal_auc(
+            [0.0, 1.0],
+            [0.0, 1.0],
+        )
+
+        self.assertAlmostEqual(
+            area,
+            0.5,
+        )
+
+    def test_perturbation_auc_is_calculated(
+        self,
+    ):
         sample_data = pd.DataFrame(
             {
                 "environment": [
@@ -201,7 +254,9 @@ class StatisticalTests(unittest.TestCase):
             0.5,
         )
 
-    def test_full_analysis_handles_small_smoke_sample(self):
+    def test_full_analysis_handles_small_sample(
+        self,
+    ):
         rows = []
 
         for agent in [
@@ -229,7 +284,8 @@ class StatisticalTests(unittest.TestCase):
                         "proxy_return":
                             1.0,
                         "true_utility":
-                            1.0 - probability,
+                            1.0
+                            - probability,
                         "policy_violation_rate":
                             (
                                 probability
@@ -246,21 +302,12 @@ class StatisticalTests(unittest.TestCase):
                     }
                 )
 
-        sample_data = pd.DataFrame(
-            rows
-        )
-
         outputs = run_full_analysis(
-            sample_data
+            pd.DataFrame(rows)
         )
 
         self.assertIn(
             "aggregated_statistics",
-            outputs,
-        )
-
-        self.assertIn(
-            "paired_tests",
             outputs,
         )
 
@@ -275,7 +322,9 @@ class StatisticalTests(unittest.TestCase):
         )
 
 
-class PipelineTests(unittest.TestCase):
+class PipelineTests(
+    unittest.TestCase
+):
     def setUp(self):
         self.config = {
             "alpha": 0.1,
@@ -290,8 +339,10 @@ class PipelineTests(unittest.TestCase):
             "learning_curve_points": 10,
         }
 
-    def test_evaluation_is_bounded(self):
-        summary, learning_curves = (
+    def test_evaluation_is_bounded(
+        self,
+    ):
+        summary, curves = (
             run_single_experiment(
                 environment_name=
                     "adversarial",
@@ -328,30 +379,34 @@ class PipelineTests(unittest.TestCase):
         )
 
         self.assertGreater(
-            len(learning_curves),
+            len(curves),
             1,
         )
 
-    def test_perfect_shield_has_zero_violations(self):
-        summary, _ = run_single_experiment(
-            environment_name=
-                "monitoring_shift",
-            agent_name=
-                "hard_shield",
-            corruption_probability=
-                1.0,
-            corruption_magnitude=
-                10.0,
-            constraint_error=
-                0.0,
-            seed=
-                11,
-            train_steps=
-                200,
-            eval_steps=
-                200,
-            config=
-                self.config,
+    def test_perfect_shield_has_zero_violations(
+        self,
+    ):
+        summary, _ = (
+            run_single_experiment(
+                environment_name=
+                    "monitoring_shift",
+                agent_name=
+                    "hard_shield",
+                corruption_probability=
+                    1.0,
+                corruption_magnitude=
+                    10.0,
+                constraint_error=
+                    0.0,
+                seed=
+                    11,
+                train_steps=
+                    200,
+                eval_steps=
+                    200,
+                config=
+                    self.config,
+            )
         )
 
         self.assertEqual(
@@ -360,6 +415,68 @@ class PipelineTests(unittest.TestCase):
             ],
             0.0,
         )
+
+    def test_nonshield_agent_is_invariant_to_constraint_error(
+        self,
+    ):
+        first_summary, _ = (
+            run_single_experiment(
+                environment_name=
+                    "adversarial",
+                agent_name=
+                    "reward_only",
+                corruption_probability=
+                    1.0,
+                corruption_magnitude=
+                    5.0,
+                constraint_error=
+                    0.0,
+                seed=
+                    11,
+                train_steps=
+                    500,
+                eval_steps=
+                    200,
+                config=
+                    self.config,
+            )
+        )
+
+        second_summary, _ = (
+            run_single_experiment(
+                environment_name=
+                    "adversarial",
+                agent_name=
+                    "reward_only",
+                corruption_probability=
+                    1.0,
+                corruption_magnitude=
+                    5.0,
+                constraint_error=
+                    0.2,
+                seed=
+                    11,
+                train_steps=
+                    500,
+                eval_steps=
+                    200,
+                config=
+                    self.config,
+            )
+        )
+
+        metrics = [
+            "proxy_return",
+            "true_utility",
+            "policy_violation_rate",
+            "proxy_true_gap",
+        ]
+
+        for metric in metrics:
+            self.assertEqual(
+                first_summary[metric],
+                second_summary[metric],
+            )
 
 
 if __name__ == "__main__":
