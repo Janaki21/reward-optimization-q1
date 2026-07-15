@@ -1,0 +1,52 @@
+project_name: invariant_constraint_statistical_pilot
+
+random_seeds:
+  - 11
+  - 17
+  - 23
+  - 31
+  - 47
+
+train_steps: 1000
+eval_steps: 500
+learning_curve_points: 20
+
+corruption_probabilities:
+  - 0.0
+  - 1.0
+
+corruption_magnitudes:
+  - 1.0
+  - 5.0
+
+constraint_errors:
+  - 0.0
+
+alpha: 0.10
+gamma: 0.95
+
+epsilon_start: 1.00
+epsilon_end: 0.05
+epsilon_decay: 0.995
+
+fixed_penalty: 2.0
+
+cost_limit: 0.02
+lambda_lr: 0.02
+lambda_max: 100.0
+
+agents:
+  - reward_only
+  - fixed_penalty
+  - lagrangian
+  - hard_shield
+
+environments:
+  - adversarial
+  - truth_proxy
+  - monitoring_shift
+
+output_dir: outputs/pilot
+figures_dir: outputs/pilot/figures
+tables_dir: outputs/pilot/tables
+logs_dir: outputs/pilot/logs
