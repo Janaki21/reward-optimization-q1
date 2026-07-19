@@ -1,0 +1,9 @@
+gymnasium==0.28.1
+matplotlib>=3.8,<4
+numpy>=1.26,<3
+omnisafe==0.5.0
+pandas>=2.1,<4
+PyYAML>=6,<7
+safety-gymnasium==0.4.1
+scipy>=1.11,<2
+torch>=2.1,<3

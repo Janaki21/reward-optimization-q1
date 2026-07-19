@@ -1,8 +1,53 @@
-.venv/
+# Python bytecode and caches
 __pycache__/
-*.pyc
-.DS_Store
+*.py[cod]
+*$py.class
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
-outputs/smoke/
-outputs/logs/episode_level_logs.csv
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Conda and environment-local files
+.conda/
+conda-meta/
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+
+# OmniSafe training artifacts
+runs/
+
+# Installation and execution logs
+*.log
+omnisafe_install.log
+outputs/main_run.log
+
+# Intermediate and pilot experiments
+outputs/ablation_pilot/
+outputs/neural/
+outputs/pilot/
+
+# Non-final mutable logs
+outputs/logs/
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Temporary or incorrectly named requirement files
+requirements_neural.tx
+neural_environment_lock.txt
+
+# Temporary files
+*.tmp
+*.temp

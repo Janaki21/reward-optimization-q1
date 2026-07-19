@@ -1,0 +1,65 @@
+{
+  "configuration": {
+    "project_name": "final_lagrange_30seed",
+    "algorithms": [
+      "PPOLag",
+      "RCPO"
+    ],
+    "environments": [
+      "RewardInvariantAdversarial-v0",
+      "RewardInvariantTruthProxy-v0",
+      "RewardInvariantMonitoringShift-v0"
+    ],
+    "random_seeds": [
+      11,
+      17,
+      23,
+      31,
+      47,
+      59,
+      71,
+      83,
+      97,
+      109,
+      127,
+      139,
+      151,
+      163,
+      179,
+      191,
+      211,
+      223,
+      239,
+      251,
+      269,
+      281,
+      293,
+      307,
+      331,
+      347,
+      359,
+      373,
+      389,
+      401
+    ],
+    "lambda_learning_rates": [
+      0.1
+    ],
+    "total_steps": 32768,
+    "steps_per_epoch": 2048,
+    "update_iters": 20,
+    "batch_size": 128,
+    "cost_rate_limit": 0.02,
+    "episode_length": 64,
+    "evaluation_episodes": 100,
+    "device": "cpu",
+    "torch_threads": 1,
+    "save_model_freq": 1000,
+    "output_dir": "outputs/final/lagrange_30seed"
+  },
+  "python": "3.10.20",
+  "omnisafe": "0.5.0",
+  "torch": "2.13.0",
+  "completed": 180,
+  "failed": 0
+}
