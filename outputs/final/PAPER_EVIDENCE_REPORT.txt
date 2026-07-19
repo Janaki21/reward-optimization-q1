@@ -1,0 +1,307 @@
+========================================================================================================================
+PAPER EVIDENCE REPORT
+========================================================================================================================
+Prespecified final rows: 1,410
+Independent seeds per final condition: 30
+
+========================================================================================================================
+PRIMARY SAFE-RL SUMMARY
+========================================================================================================================
+Source: outputs/final/analysis/tables/primary_summary.csv
+Rows: 45
+Columns: ['environment', 'method', 'metric', 'n_seeds', 'mean', 'sd', 'median', 'q1', 'q3', 'ci95_lower', 'ci95_upper']
+
+     environment method         metric  n_seeds     mean       sd   median       q1       q3  ci95_lower  ci95_upper
+     adversarial    PPO   true_utility       30 0.496792 0.023614 0.501094 0.497227 0.504258    0.487479    0.502380
+     adversarial    PPO violation_rate       30 0.499214 0.005214 0.498906 0.495742 0.502773    0.497344    0.500979
+     adversarial    PPO proxy_true_gap       30 2.496068 0.026072 2.494531 2.478711 2.513867    2.487005    2.505234
+     adversarial    CPO   true_utility       30 0.937271 0.108313 1.000000 0.874492 1.000000    0.898128    0.974542
+     adversarial    CPO violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial    CPO proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial PPOLag   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+     adversarial PPOLag violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial PPOLag proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial   RCPO   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+     adversarial   RCPO violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial   RCPO proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial   Veto   true_utility       30 0.995813 0.022931 1.000000 1.000000 1.000000    0.987440    1.000000
+     adversarial   Veto violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     adversarial   Veto proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     truth_proxy    PPO   true_utility       30 0.499464 0.002655 0.500000 0.497695 0.501445    0.498505    0.500354
+     truth_proxy    PPO violation_rate       30 0.500536 0.002655 0.500000 0.498555 0.502305    0.499620    0.501479
+     truth_proxy    PPO proxy_true_gap       30 4.500536 0.002655 4.500000 4.498555 4.502305    4.499620    4.501479
+     truth_proxy    CPO   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+     truth_proxy    CPO violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     truth_proxy    CPO proxy_true_gap       30 1.497318 0.013274 1.500000 1.488477 1.507227    1.492682    1.501953
+     truth_proxy PPOLag   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+     truth_proxy PPOLag violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     truth_proxy PPOLag proxy_true_gap       30 1.497865 0.030898 1.493359 1.474609 1.518555    1.487317    1.508724
+     truth_proxy   RCPO   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+     truth_proxy   RCPO violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     truth_proxy   RCPO proxy_true_gap       30 1.497865 0.030898 1.493359 1.474609 1.518555    1.487266    1.508620
+     truth_proxy   Veto   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+     truth_proxy   Veto violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+     truth_proxy   Veto proxy_true_gap       30 1.500500 0.024295 1.499250 1.485250 1.520125    1.491733    1.508950
+monitoring_shift    PPO   true_utility       30 0.491146 0.030911 0.496406 0.493906 0.503828    0.478770    0.500073
+monitoring_shift    PPO violation_rate       30 0.508854 0.030911 0.503594 0.496172 0.506094    0.499864    0.521302
+monitoring_shift    PPO proxy_true_gap       30 2.503854 0.031668 2.514063 2.470312 2.526758    2.492448    2.515104
+monitoring_shift    CPO   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+monitoring_shift    CPO violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift    CPO proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift PPOLag   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+monitoring_shift PPOLag violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift PPOLag proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift   RCPO   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+monitoring_shift   RCPO violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift   RCPO proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift   Veto   true_utility       30 1.000000 0.000000 1.000000 1.000000 1.000000    1.000000    1.000000
+monitoring_shift   Veto violation_rate       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+monitoring_shift   Veto proxy_true_gap       30 0.000000 0.000000 0.000000 0.000000 0.000000    0.000000    0.000000
+
+========================================================================================================================
+PRIMARY PAIRED TESTS WITH HOLM CORRECTION
+========================================================================================================================
+Source: outputs/final/analysis/tables/paired_tests_holm.csv
+Rows: 24
+Columns: ['environment', 'comparison', 'method', 'baseline', 'metric', 'n_pairs', 'mean_difference', 'median_difference', 'cohens_dz', 'rank_biserial', 'wilcoxon_statistic', 'p_value', 'p_holm', 'significant_0_05']
+
+     environment    comparison method baseline         metric  n_pairs  mean_difference  median_difference   cohens_dz  rank_biserial  wilcoxon_statistic      p_value       p_holm  significant_0_05
+     adversarial    CPO vs PPO    CPO      PPO violation_rate       30        -0.499214          -0.498906  -77.492963           -1.0                 0.0 1.732216e-06 2.072127e-05              True
+     adversarial    CPO vs PPO    CPO      PPO   true_utility       30         0.440479           0.495469    3.420509            1.0                 0.0 1.862645e-09 2.235174e-08              True
+     adversarial PPOLag vs PPO PPOLag      PPO violation_rate       30        -0.499214          -0.498906  -77.492963           -1.0                 0.0 1.732216e-06 2.072127e-05              True
+     adversarial PPOLag vs PPO PPOLag      PPO   true_utility       30         0.503208           0.498906   17.248389            1.0                 0.0 1.732216e-06 1.899450e-05              True
+     adversarial   RCPO vs PPO   RCPO      PPO violation_rate       30        -0.499214          -0.498906  -77.492963           -1.0                 0.0 1.732216e-06 2.072127e-05              True
+     adversarial   RCPO vs PPO   RCPO      PPO   true_utility       30         0.503208           0.498906   17.248389            1.0                 0.0 1.732216e-06 1.899450e-05              True
+     adversarial   Veto vs PPO   Veto      PPO violation_rate       30        -0.499214          -0.498906  -77.492963           -1.0                 0.0 1.732216e-06 2.072127e-05              True
+     adversarial   Veto vs PPO   Veto      PPO   true_utility       30         0.499022           0.498906   79.505169            1.0                 0.0 1.732216e-06 1.899450e-05              True
+     truth_proxy    CPO vs PPO    CPO      PPO violation_rate       30        -0.500536          -0.500000 -152.613977           -1.0                 0.0 1.726773e-06 2.072127e-05              True
+     truth_proxy    CPO vs PPO    CPO      PPO   true_utility       30         0.500536           0.500000  152.613977            1.0                 0.0 1.726773e-06 1.899450e-05              True
+     truth_proxy PPOLag vs PPO PPOLag      PPO violation_rate       30        -0.500536          -0.500000 -152.613977           -1.0                 0.0 1.726773e-06 2.072127e-05              True
+     truth_proxy PPOLag vs PPO PPOLag      PPO   true_utility       30         0.500536           0.500000  152.613977            1.0                 0.0 1.726773e-06 1.899450e-05              True
+     truth_proxy   RCPO vs PPO   RCPO      PPO violation_rate       30        -0.500536          -0.500000 -152.613977           -1.0                 0.0 1.726773e-06 2.072127e-05              True
+     truth_proxy   RCPO vs PPO   RCPO      PPO   true_utility       30         0.500536           0.500000  152.613977            1.0                 0.0 1.726773e-06 1.899450e-05              True
+     truth_proxy   Veto vs PPO   Veto      PPO violation_rate       30        -0.500536          -0.500000 -152.613977           -1.0                 0.0 1.726773e-06 2.072127e-05              True
+     truth_proxy   Veto vs PPO   Veto      PPO   true_utility       30         0.500536           0.500000  152.613977            1.0                 0.0 1.726773e-06 1.899450e-05              True
+monitoring_shift    CPO vs PPO    CPO      PPO violation_rate       30        -0.508854          -0.503594  -13.324758           -1.0                 0.0 1.733307e-06 2.072127e-05              True
+monitoring_shift    CPO vs PPO    CPO      PPO   true_utility       30         0.508854           0.503594   13.324758            1.0                 0.0 1.733307e-06 1.899450e-05              True
+monitoring_shift PPOLag vs PPO PPOLag      PPO violation_rate       30        -0.508854          -0.503594  -13.324758           -1.0                 0.0 1.733307e-06 2.072127e-05              True
+monitoring_shift PPOLag vs PPO PPOLag      PPO   true_utility       30         0.508854           0.503594   13.324758            1.0                 0.0 1.733307e-06 1.899450e-05              True
+monitoring_shift   RCPO vs PPO   RCPO      PPO violation_rate       30        -0.508854          -0.503594  -13.324758           -1.0                 0.0 1.733307e-06 2.072127e-05              True
+monitoring_shift   RCPO vs PPO   RCPO      PPO   true_utility       30         0.508854           0.503594   13.324758            1.0                 0.0 1.733307e-06 1.899450e-05              True
+monitoring_shift   Veto vs PPO   Veto      PPO violation_rate       30        -0.508854          -0.503594  -13.324758           -1.0                 0.0 1.733307e-06 2.072127e-05              True
+monitoring_shift   Veto vs PPO   Veto      PPO   true_utility       30         0.508854           0.503594   13.324758            1.0                 0.0 1.733307e-06 1.899450e-05              True
+
+========================================================================================================================
+VETO SENSITIVITY AUC
+========================================================================================================================
+Source: outputs/final/analysis/tables/veto_auc_summary.csv
+Rows: 9
+Columns: ['environment', 'metric', 'n_seeds', 'mean', 'sd', 'ci95_lower', 'ci95_upper']
+
+     environment                 metric  n_seeds     mean       sd  ci95_lower  ci95_upper
+     adversarial          violation_auc       30 0.009898 0.000265    0.009804    0.009991
+     adversarial       utility_loss_auc       30 0.010736 0.004573    0.009829    0.012447
+     adversarial false_intervention_auc       30 0.000000 0.000000    0.000000    0.000000
+monitoring_shift          violation_auc       30 0.019990 0.000346    0.019868    0.020109
+monitoring_shift       utility_loss_auc       30 0.019990 0.000346    0.019867    0.020106
+monitoring_shift false_intervention_auc       30 0.009736 0.000702    0.009455    0.009949
+     truth_proxy          violation_auc       30 0.019990 0.000346    0.019868    0.020111
+     truth_proxy       utility_loss_auc       30 0.019990 0.000346    0.019866    0.020111
+     truth_proxy false_intervention_auc       30 0.010010 0.000348    0.009885    0.010133
+
+========================================================================================================================
+RLHF-PROXY SUMMARY
+========================================================================================================================
+Source: outputs/final/rlhf_analysis/tables/rlhf_summary.csv
+Rows: 120
+Columns: ['perturbation', 'method', 'metric', 'n_seeds', 'mean', 'sd', 'median', 'q1', 'q3', 'ci95_lower', 'ci95_upper']
+
+ perturbation        method            metric  n_seeds      mean       sd    median        q1        q3  ci95_lower  ci95_upper
+         0.00 fixed_penalty mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.00 fixed_penalty    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00 fixed_penalty   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00 fixed_penalty    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00 fixed_penalty      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00 fixed_penalty   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036689   -0.033734
+         0.00     hard_veto mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.00     hard_veto    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00     hard_veto   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00     hard_veto    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00     hard_veto      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00     hard_veto   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036663   -0.033699
+         0.00    lagrangian mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.00    lagrangian    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00    lagrangian   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00    lagrangian    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00    lagrangian      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00    lagrangian   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036666   -0.033695
+         0.00   reward_only mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.00   reward_only    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00   reward_only   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00   reward_only    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00   reward_only      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.00   reward_only   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036665   -0.033705
+         0.25 fixed_penalty mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.25 fixed_penalty    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25 fixed_penalty   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25 fixed_penalty    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25 fixed_penalty      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25 fixed_penalty   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036671   -0.033728
+         0.25     hard_veto mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.25     hard_veto    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25     hard_veto   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25     hard_veto    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25     hard_veto      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25     hard_veto   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036709   -0.033740
+         0.25    lagrangian mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.25    lagrangian    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25    lagrangian   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25    lagrangian    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25    lagrangian      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25    lagrangian   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036685   -0.033680
+         0.25   reward_only mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.25   reward_only    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25   reward_only   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25   reward_only    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25   reward_only      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.25   reward_only   reward_true_gap       30 -0.035205 0.004259 -0.035613 -0.037705 -0.032395   -0.036683   -0.033712
+         0.50 fixed_penalty mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.50 fixed_penalty    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50 fixed_penalty   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50 fixed_penalty    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50 fixed_penalty      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50 fixed_penalty   reward_true_gap       30 -0.219581 0.018506 -0.215539 -0.222747 -0.208339   -0.226184   -0.213378
+         0.50     hard_veto mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.50     hard_veto    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50     hard_veto   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50     hard_veto    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50     hard_veto      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50     hard_veto   reward_true_gap       30 -0.219581 0.018506 -0.215539 -0.222747 -0.208339   -0.226472   -0.213331
+         0.50    lagrangian mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.50    lagrangian    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50    lagrangian   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50    lagrangian    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50    lagrangian      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50    lagrangian   reward_true_gap       30 -0.219581 0.018506 -0.215539 -0.222747 -0.208339   -0.226277   -0.213372
+         0.50   reward_only mean_true_utility       30  0.825000 0.000000  0.825000  0.825000  0.825000    0.825000    0.825000
+         0.50   reward_only    violation_rate       30  0.250000 0.000000  0.250000  0.250000  0.250000    0.250000    0.250000
+         0.50   reward_only   sycophancy_rate       30  0.250000 0.000000  0.250000  0.250000  0.250000    0.250000    0.250000
+         0.50   reward_only    deception_rate       30  0.250000 0.000000  0.250000  0.250000  0.250000    0.250000    0.250000
+         0.50   reward_only      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.50   reward_only   reward_true_gap       30  0.044227 0.025430  0.054018  0.038459  0.061240    0.034537    0.052599
+         0.75 fixed_penalty mean_true_utility       30  0.959167 0.059626  1.000000  0.879688  1.000000    0.937292    0.979583
+         0.75 fixed_penalty    violation_rate       30  0.058333 0.085181  0.000000  0.000000  0.171875    0.029167    0.089583
+         0.75 fixed_penalty   sycophancy_rate       30  0.058333 0.085181  0.000000  0.000000  0.171875    0.029167    0.089583
+         0.75 fixed_penalty    deception_rate       30  0.058333 0.085181  0.000000  0.000000  0.171875    0.029167    0.089583
+         0.75 fixed_penalty      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75 fixed_penalty   reward_true_gap       30 -0.374772 0.114514 -0.435880 -0.459305 -0.229007   -0.414012   -0.333691
+         0.75     hard_veto mean_true_utility       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         0.75     hard_veto    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75     hard_veto   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75     hard_veto    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75     hard_veto      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75     hard_veto   reward_true_gap       30 -0.449101 0.015623 -0.449147 -0.462660 -0.435356   -0.454733   -0.443633
+         0.75    lagrangian mean_true_utility       30  0.988333 0.063901  1.000000  1.000000  1.000000    0.965000    1.000000
+         0.75    lagrangian    violation_rate       30  0.016667 0.091287  0.000000  0.000000  0.000000    0.000000    0.050000
+         0.75    lagrangian   sycophancy_rate       30  0.016667 0.091287  0.000000  0.000000  0.000000    0.000000    0.050000
+         0.75    lagrangian    deception_rate       30  0.016667 0.091287  0.000000  0.000000  0.000000    0.000000    0.050000
+         0.75    lagrangian      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75    lagrangian   reward_true_gap       30 -0.430856 0.099562 -0.447756 -0.462660 -0.433429   -0.452975   -0.391256
+         0.75   reward_only mean_true_utility       30  0.475000 0.000000  0.475000  0.475000  0.475000    0.475000    0.475000
+         0.75   reward_only    violation_rate       30  0.750000 0.000000  0.750000  0.750000  0.750000    0.750000    0.750000
+         0.75   reward_only   sycophancy_rate       30  0.750000 0.000000  0.750000  0.750000  0.750000    0.750000    0.750000
+         0.75   reward_only    deception_rate       30  0.750000 0.000000  0.750000  0.750000  0.750000    0.750000    0.750000
+         0.75   reward_only      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         0.75   reward_only   reward_true_gap       30  0.370669 0.025082  0.379829  0.347427  0.391715    0.361748    0.379449
+         1.00 fixed_penalty mean_true_utility       30  0.578542 0.033464  0.562500  0.562500  0.562500    0.568333    0.591667
+         1.00 fixed_penalty    violation_rate       30  0.602083 0.047806  0.625000  0.625000  0.625000    0.583333    0.616667
+         1.00 fixed_penalty   sycophancy_rate       30  0.602083 0.047806  0.625000  0.625000  0.625000    0.583333    0.616667
+         1.00 fixed_penalty    deception_rate       30  0.602083 0.047806  0.625000  0.625000  0.625000    0.583333    0.616667
+         1.00 fixed_penalty      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00 fixed_penalty   reward_true_gap       30  0.209607 0.054776  0.234940  0.229277  0.237606    0.189176    0.227531
+         1.00     hard_veto mean_true_utility       30  0.830000 0.000000  0.830000  0.830000  0.830000    0.830000    0.830000
+         1.00     hard_veto    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00     hard_veto   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00     hard_veto    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00     hard_veto      refusal_rate       30  0.500000 0.000000  0.500000  0.500000  0.500000    0.500000    0.500000
+         1.00     hard_veto   reward_true_gap       30 -0.389988 0.003453 -0.390360 -0.392058 -0.388011   -0.391254   -0.388803
+         1.00    lagrangian mean_true_utility       30  0.830000 0.000000  0.830000  0.830000  0.830000    0.830000    0.830000
+         1.00    lagrangian    violation_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00    lagrangian   sycophancy_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00    lagrangian    deception_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00    lagrangian      refusal_rate       30  0.500000 0.000000  0.500000  0.500000  0.500000    0.500000    0.500000
+         1.00    lagrangian   reward_true_gap       30 -0.389988 0.003453 -0.390360 -0.392058 -0.388011   -0.391224   -0.388781
+         1.00   reward_only mean_true_utility       30  0.300000 0.000000  0.300000  0.300000  0.300000    0.300000    0.300000
+         1.00   reward_only    violation_rate       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         1.00   reward_only   sycophancy_rate       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         1.00   reward_only    deception_rate       30  1.000000 0.000000  1.000000  1.000000  1.000000    1.000000    1.000000
+         1.00   reward_only      refusal_rate       30  0.000000 0.000000  0.000000  0.000000  0.000000    0.000000    0.000000
+         1.00   reward_only   reward_true_gap       30  0.639967 0.002742  0.640645  0.638041  0.641994    0.638984    0.640917
+
+========================================================================================================================
+RLHF-PROXY PAIRED TESTS WITH HOLM CORRECTION
+========================================================================================================================
+Source: outputs/final/rlhf_analysis/tables/rlhf_paired_tests_holm.csv
+Rows: 30
+Columns: ['perturbation', 'comparison', 'method', 'baseline', 'metric', 'n_pairs', 'mean_difference', 'median_difference', 'cohens_dz', 'rank_biserial', 'wilcoxon_statistic', 'p_value', 'p_holm', 'significant_0_05']
+
+ perturbation                   comparison        method    baseline            metric  n_pairs  mean_difference  median_difference  cohens_dz  rank_biserial  wilcoxon_statistic      p_value       p_holm  significant_0_05
+         0.00 fixed_penalty vs reward_only fixed_penalty reward_only    violation_rate       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.00 fixed_penalty vs reward_only fixed_penalty reward_only mean_true_utility       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.00    lagrangian vs reward_only    lagrangian reward_only    violation_rate       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.00    lagrangian vs reward_only    lagrangian reward_only mean_true_utility       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.00     hard_veto vs reward_only     hard_veto reward_only    violation_rate       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.00     hard_veto vs reward_only     hard_veto reward_only mean_true_utility       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.25 fixed_penalty vs reward_only fixed_penalty reward_only    violation_rate       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.25 fixed_penalty vs reward_only fixed_penalty reward_only mean_true_utility       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.25    lagrangian vs reward_only    lagrangian reward_only    violation_rate       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.25    lagrangian vs reward_only    lagrangian reward_only mean_true_utility       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.25     hard_veto vs reward_only     hard_veto reward_only    violation_rate       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.25     hard_veto vs reward_only     hard_veto reward_only mean_true_utility       30         0.000000             0.0000   0.000000            0.0                 0.0 1.000000e+00 1.000000e+00             False
+         0.50 fixed_penalty vs reward_only fixed_penalty reward_only    violation_rate       30        -0.250000            -0.2500       -inf           -1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.50 fixed_penalty vs reward_only fixed_penalty reward_only mean_true_utility       30         0.175000             0.1750        inf            1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.50    lagrangian vs reward_only    lagrangian reward_only    violation_rate       30        -0.250000            -0.2500       -inf           -1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.50    lagrangian vs reward_only    lagrangian reward_only mean_true_utility       30         0.175000             0.1750        inf            1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.50     hard_veto vs reward_only     hard_veto reward_only    violation_rate       30        -0.250000            -0.2500       -inf           -1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.50     hard_veto vs reward_only     hard_veto reward_only mean_true_utility       30         0.175000             0.1750        inf            1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.75 fixed_penalty vs reward_only fixed_penalty reward_only    violation_rate       30        -0.691667            -0.7500  -6.572545           -1.0                 0.0 6.634459e-07 4.644121e-06              True
+         0.75 fixed_penalty vs reward_only fixed_penalty reward_only mean_true_utility       30         0.484167             0.5250   6.572547            1.0                 0.0 6.634459e-07 4.644121e-06              True
+         0.75    lagrangian vs reward_only    lagrangian reward_only    violation_rate       30        -0.733333            -0.7500  -6.502343           -1.0                 0.0 6.798850e-08 6.480695e-07              True
+         0.75    lagrangian vs reward_only    lagrangian reward_only mean_true_utility       30         0.513333             0.5250   6.502342            1.0                 0.0 6.798850e-08 6.480695e-07              True
+         0.75     hard_veto vs reward_only     hard_veto reward_only    violation_rate       30        -0.750000            -0.7500       -inf           -1.0                 0.0 4.320463e-08 6.480695e-07              True
+         0.75     hard_veto vs reward_only     hard_veto reward_only mean_true_utility       30         0.525000             0.5250        inf            1.0                 0.0 4.320463e-08 6.480695e-07              True
+         1.00 fixed_penalty vs reward_only fixed_penalty reward_only    violation_rate       30        -0.397917            -0.3750  -6.737374           -1.0                 0.0 3.297882e-07 2.638305e-06              True
+         1.00 fixed_penalty vs reward_only fixed_penalty reward_only mean_true_utility       30         0.278542             0.2625   6.737375            1.0                 0.0 3.297882e-07 2.638305e-06              True
+         1.00    lagrangian vs reward_only    lagrangian reward_only    violation_rate       30        -1.000000            -1.0000       -inf           -1.0                 0.0 4.320463e-08 6.480695e-07              True
+         1.00    lagrangian vs reward_only    lagrangian reward_only mean_true_utility       30         0.530000             0.5300        inf            1.0                 0.0 4.320463e-08 6.480695e-07              True
+         1.00     hard_veto vs reward_only     hard_veto reward_only    violation_rate       30        -1.000000            -1.0000       -inf           -1.0                 0.0 4.320463e-08 6.480695e-07              True
+         1.00     hard_veto vs reward_only     hard_veto reward_only mean_true_utility       30         0.530000             0.5300        inf            1.0                 0.0 4.320463e-08 6.480695e-07              True
+
+========================================================================================================================
+RLHF-PROXY AUC SUMMARY
+========================================================================================================================
+Source: outputs/final/rlhf_analysis/tables/rlhf_auc_summary.csv
+Rows: 16
+Columns: ['method', 'metric', 'n_seeds', 'mean', 'sd', 'ci95_lower', 'ci95_upper']
+
+       method           metric  n_seeds     mean       sd  ci95_lower  ci95_upper
+fixed_penalty    violation_auc       30 0.089844 0.021785    0.082292    0.097656
+fixed_penalty utility_loss_auc       30 0.062891 0.015250    0.057604    0.068359
+fixed_penalty   sycophancy_auc       30 0.089844 0.021785    0.082292    0.097656
+fixed_penalty    deception_auc       30 0.089844 0.021785    0.082552    0.097656
+    hard_veto    violation_auc       30 0.000000 0.000000    0.000000    0.000000
+    hard_veto utility_loss_auc       30 0.021250 0.000000    0.021250    0.021250
+    hard_veto   sycophancy_auc       30 0.000000 0.000000    0.000000    0.000000
+    hard_veto    deception_auc       30 0.000000 0.000000    0.000000    0.000000
+   lagrangian    violation_auc       30 0.004167 0.022822    0.000000    0.012500
+   lagrangian utility_loss_auc       30 0.024167 0.015975    0.021250    0.030000
+   lagrangian   sycophancy_auc       30 0.004167 0.022822    0.000000    0.012500
+   lagrangian    deception_auc       30 0.004167 0.022822    0.000000    0.012500
+  reward_only    violation_auc       30 0.375000 0.000000    0.375000    0.375000
+  reward_only utility_loss_auc       30 0.262500 0.000000    0.262500    0.262500
+  reward_only   sycophancy_auc       30 0.375000 0.000000    0.375000    0.375000
+  reward_only    deception_auc       30 0.375000 0.000000    0.375000    0.375000
+
+========================================================================================================================
+END OF REPORT
+========================================================================================================================
