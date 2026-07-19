@@ -1,0 +1,57 @@
+project_name: dqn_reward_misspecification_tuning_pilot
+
+random_seeds:
+  - 11
+  - 17
+
+training_steps: 3000
+evaluation_steps: 1000
+learning_curve_points: 30
+
+corruption_probabilities:
+  - 1.0
+
+corruption_magnitudes:
+  - 5.0
+
+constraint_errors:
+  - 0.0
+
+agents:
+  - reward_only_dqn
+  - fixed_penalty_dqn
+  - lagrangian_dqn
+  - hard_shield_dqn
+
+environments:
+  - adversarial
+  - truth_proxy
+  - monitoring_shift
+
+hidden_dimensions:
+  - 64
+  - 64
+
+learning_rate: 0.001
+gamma: 0.95
+
+batch_size: 64
+replay_capacity: 20000
+replay_warmup: 256
+target_update_interval: 100
+
+epsilon_start: 1.0
+epsilon_end: 0.05
+epsilon_decay_steps: 2000
+
+fixed_penalty: 6.0
+
+cost_limit: 0.02
+lambda_learning_rate: 0.05
+lambda_maximum: 100.0
+
+gradient_clip: 10.0
+
+device: cpu
+
+output_dir: outputs/neural/dqn_tuning_pilot

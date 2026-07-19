@@ -1,0 +1,28 @@
+project_name: omnisafe_adversarial_convergence_pilot
+
+algorithms:
+  - PPO
+  - PPOLag
+  - CPO
+  - RCPO
+
+environments:
+  - RewardInvariantAdversarial-v0
+
+random_seeds:
+  - 11
+
+total_steps: 8192
+steps_per_epoch: 1024
+update_iters: 10
+batch_size: 128
+
+cost_rate_limit: 0.02
+episode_length: 64
+evaluation_episodes: 50
+
+device: cpu
+torch_threads: 1
+save_model_freq: 1000
+
+output_dir: outputs/neural/omnisafe_convergence_pilot

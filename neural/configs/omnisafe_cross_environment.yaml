@@ -1,0 +1,27 @@
+project_name: omnisafe_cross_environment_validation
+
+algorithms:
+  - PPO
+  - CPO
+
+environments:
+  - RewardInvariantTruthProxy-v0
+  - RewardInvariantMonitoringShift-v0
+
+random_seeds:
+  - 11
+
+total_steps: 32768
+steps_per_epoch: 2048
+update_iters: 20
+batch_size: 128
+
+cost_rate_limit: 0.02
+episode_length: 64
+evaluation_episodes: 100
+
+device: cpu
+torch_threads: 1
+save_model_freq: 1000
+
+output_dir: outputs/neural/omnisafe_cross_environment

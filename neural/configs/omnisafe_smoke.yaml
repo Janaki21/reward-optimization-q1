@@ -1,0 +1,24 @@
+project_name: omnisafe_reward_invariance_smoke
+
+algorithms:
+  - PPO
+  - PPOLag
+  - CPO
+  - RCPO
+
+environments:
+  - RewardInvariantAdversarial-v0
+
+random_seeds:
+  - 11
+
+total_steps: 512
+steps_per_epoch: 128
+update_iters: 2
+batch_size: 32
+
+device: cpu
+torch_threads: 1
+save_model_freq: 1
+
+output_dir: outputs/neural/omnisafe_smoke
